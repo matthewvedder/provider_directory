@@ -1,8 +1,10 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
 
 db = SQLAlchemy()
+ma = Marshmallow()
 
 def create_app(config_filename=None):
     app = Flask(__name__)
@@ -17,6 +19,7 @@ def create_app(config_filename=None):
         app.config.from_pyfile(config_filename)
 
     db.init_app(app)
+    ma.init_app(app)
 
     # Import and register Blueprints here, if any
     # from yourapplication.some_module import some_blueprint
