@@ -21,8 +21,7 @@ def create_app(config_filename=None):
     db.init_app(app)
     ma.init_app(app)
 
-    # Import and register Blueprints here, if any
-    # from yourapplication.some_module import some_blueprint
-    # app.register_blueprint(some_blueprint)
+    from .controllers.provider_controller import provider_blueprint
+    app.register_blueprint(provider_blueprint)
 
     return app
