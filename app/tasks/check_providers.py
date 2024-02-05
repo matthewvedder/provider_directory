@@ -1,5 +1,5 @@
-from app import celery
+from app.app import celery
 
 @celery.task
-def example_task(x, y):
+def check_providers(x, y):
     return x + y

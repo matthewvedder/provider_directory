@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app.models.provider import Provider
 from app.schemas.provider_schema import ProviderSchema
-from app import db
+from app.app import db
 
 provider_blueprint = Blueprint('providers', __name__)
 provider_schema = ProviderSchema()
