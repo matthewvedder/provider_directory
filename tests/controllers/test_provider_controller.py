@@ -43,3 +43,30 @@ class TestProviderEndpoints(TestCase):
         provider = Provider.query.first()
         self.assertIsNotNone(provider)
         self.assertEqual(provider.npi, new_provider_data['npi'])
+
+    def test_add_provider_duplicate_npi(self):
+        # Data for creating a new provider
+        new_provider_data = {
+            "npi": "1234567890",
+            "name": "John Doe",
+            "npi_type": "Individual",
+            "primary_practice_address": "123 Main St, Anytown, USA",
+            "phone": "555-555-5555",
+            "primary_taxonomy": "General Practice"
+        }
+
+        # Add the provider to the database
+        provider = Provider(**new_provider_data)
+        db.session.add(provider)
+        db.session.commit()
+
+        # Send a POST request to the add_provider endpoint with the same NPI
+        response = self.client.post('/providers', json=new_provider_data)
+
+        # Check that the response status code is 400 (Bad Request)
+        self.assertEqual(response.status_code, 400)
+
+        # Verify the response contains an error message
+        response_data = response.json
+        self.assertIn('error', response_data)
+        self.assertEqual(response_data['error'], 'NPI must be unique')

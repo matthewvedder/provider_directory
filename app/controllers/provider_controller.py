@@ -3,6 +3,7 @@ from app.models.provider import Provider
 from app.schemas.provider_schema import ProviderSchema
 from app.app import db
 from marshmallow.exceptions import ValidationError
+from sqlalchemy import exc
 
 provider_blueprint = Blueprint('providers', __name__)
 provider_schema = ProviderSchema()
@@ -19,7 +20,12 @@ def add_provider():
 
     # Add to the database and commit
     db.session.add(provider)
-    db.session.commit()
+    try:
+        db.session.commit()
+    except exc.IntegrityError as e:
+        db.session.rollback()
+        return jsonify({'error': 'NPI must be unique'}), 400
 
     # Serialize and return the newly created provider
     return provider_schema.jsonify(provider), 201
+
