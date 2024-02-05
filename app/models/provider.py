@@ -6,15 +6,15 @@ class Provider(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     npi = db.Column(db.String(10), unique=True, nullable=False)
-    name = db.Column(db.String(255), nullable=False)
-    npi_type = db.Column(db.String(50), nullable=False)
-    primary_practice_address = db.Column(db.String(255), nullable=False)
-    phone = db.Column(db.String(20), nullable=False)
-    primary_taxonomy = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(255), nullable=True, default=None)  # Made nullable with default
+    npi_type = db.Column(db.String(50), nullable=True, default=None)  # Made nullable with default
+    primary_practice_address = db.Column(db.String(255), nullable=True, default=None)  # Made nullable with default
+    phone = db.Column(db.String(20), nullable=True, default=None)  # Made nullable with default
+    primary_taxonomy = db.Column(db.String(255), nullable=True, default=None)  # Made nullable with default
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, npi, name, npi_type, primary_practice_address, phone, primary_taxonomy):
+    def __init__(self, npi, name=None, npi_type=None, primary_practice_address=None, phone=None, primary_taxonomy=None):
         self.npi = npi
         self.name = name
         self.npi_type = npi_type
@@ -23,4 +23,4 @@ class Provider(db.Model):
         self.primary_taxonomy = primary_taxonomy
 
     def __repr__(self):
-        return f'<Provider {self.name} NPI: {self.npi}>'
+        return f'<Provider {self.name if self.name else "Unnamed"} NPI: {self.npi}>'
