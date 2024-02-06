@@ -4,6 +4,19 @@ from app.app import create_app, db
 from app.models.provider_archive import ProviderArchive
 from datetime import datetime
 
+provider_data = {
+    'original_provider_id': 1,  
+    'npi': "1234567890",
+    'name': "John Doe",
+    'npi_type': "Individual",
+    'primary_practice_address': "123 Main St, Anytown, USA",
+    'city': "Anytown",
+    'state': "NY",
+    'postal_code': "12345",
+    'phone': "555-555-5555",
+    'primary_taxonomy': "General Practice"
+}
+
 class TestProviderArchiveModel(TestCase):
     def create_app(self):
         # Import the configuration specific to testing
@@ -19,15 +32,7 @@ class TestProviderArchiveModel(TestCase):
 
     def test_create_provider_archive(self):
         # Create a new ProviderArchive instance
-        provider_archive = ProviderArchive(
-            original_provider_id=1,
-            npi="1234567890",
-            name="John Doe",
-            npi_type="Individual",
-            primary_practice_address="123 Main St, Anytown, USA",
-            phone="555-555-5555",
-            primary_taxonomy="General Practice"
-        )
+        provider_archive = ProviderArchive(**provider_data)
 
         db.session.add(provider_archive)
         db.session.commit()
@@ -45,15 +50,7 @@ class TestProviderArchiveModel(TestCase):
 
     def test_update_provider(self):
         # Create a new ProviderArchive instance
-        provider_archive = ProviderArchive(
-            original_provider_id=1,
-            npi="1234567890",
-            name="John Doe",
-            npi_type="Individual",
-            primary_practice_address="123 Main St, Anytown, USA",
-            phone="555-555-5555",
-            primary_taxonomy="General Practice"
-        )
+        provider_archive = ProviderArchive(**provider_data)
 
         db.session.add(provider_archive)
         db.session.commit()
@@ -73,15 +70,8 @@ class TestProviderArchiveModel(TestCase):
 
     def test_delete_provider(self):
         # Create a new ProviderArchive instance
-        provider_archive = ProviderArchive(
-            original_provider_id=1,
-            npi="1234567890",
-            name="John Doe",
-            npi_type="Individual",
-            primary_practice_address="123 Main St, Anytown, USA",
-            phone="555-555-5555",
-            primary_taxonomy="General Practice"
-        )
+        provider_archive = ProviderArchive(**provider_data)
+
 
         db.session.add(provider_archive)
         db.session.commit()

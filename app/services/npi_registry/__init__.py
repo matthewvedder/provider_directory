@@ -45,3 +45,72 @@ def serialize_registry_provider(provider_registry_response):
                 provider_data["primary_taxonomy"] = primary_taxonomy['desc']
 
     return provider_data
+
+
+# example response from api call:
+
+# {
+#   "result_count": 1,
+#   "results": [
+#     {
+#       "created_epoch": "1347460995000",
+#       "enumeration_type": "NPI-2",
+#       "last_updated_epoch": "1459198967000",
+#       "number": "1205186715",
+#       "addresses": [
+#         {
+#           "country_code": "US",
+#           "country_name": "United States",
+#           "address_purpose": "LOCATION",
+#           "address_type": "DOM",
+#           "address_1": "1500 S LAKE PARK AVE",
+#           "city": "HOBART",
+#           "state": "IN",
+#           "postal_code": "463426638",
+#           "telephone_number": "770-740-0895",
+#           "fax_number": "770-740-0896"
+#         },
+#         {
+#           "country_code": "US",
+#           "country_name": "United States",
+#           "address_purpose": "MAILING",
+#           "address_type": "DOM",
+#           "address_1": "PO BOX 849318",
+#           "city": "BOSTON",
+#           "state": "MA",
+#           "postal_code": "022849318",
+#           "telephone_number": "770-740-0895",
+#           "fax_number": "770-740-0896"
+#         }
+#       ],
+#       "practiceLocations": [],
+#       "basic": {
+#         "organization_name": "24 ON PHYSICIANS, P.C.",
+#         "organizational_subpart": "NO",
+#         "enumeration_date": "2012-09-12",
+#         "last_updated": "2016-03-28",
+#         "status": "A",
+#         "authorized_official_first_name": "DAN",
+#         "authorized_official_last_name": "FULLER",
+#         "authorized_official_middle_name": "A.",
+#         "authorized_official_telephone_number": "7707400895",
+#         "authorized_official_title_or_position": "VP/Secretary",
+#         "authorized_official_name_prefix": "Mr.",
+#         "authorized_official_name_suffix": "--"
+#       },
+#       "taxonomies": [
+#         {
+#           "code": "208M00000X",
+#           "taxonomy_group": "193200000X - Multi-Specialty Group",
+#           "desc": "Hospitalist",
+#           "state": null,
+#           "license": null,
+#           "primary": true
+#         }
+#       ],
+#       "identifiers": [],
+#       "endpoints": [],
+#       "other_names": []
+#     }
+#   ]
+# }

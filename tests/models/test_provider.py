@@ -5,6 +5,18 @@ from app.models.provider import Provider
 from app.models.provider_archive import ProviderArchive
 from datetime import datetime
 
+provider_data = {
+    'npi': "1234567890",
+    'name': "John Doe",
+    'npi_type': "Individual",
+    'primary_practice_address': "123 Main St, Anytown, USA",
+    'city': "Anytown",
+    'state': "NY",
+    'postal_code': "12345",
+    'phone': "555-555-5555",
+    'primary_taxonomy': "General Practice"
+}
+
 class TestProviderModel(TestCase):
     def create_app(self):
         # Import the configuration specific to testing
@@ -20,14 +32,7 @@ class TestProviderModel(TestCase):
 
     def test_create_provider(self):
         # Create a new Provider instance
-        provider = Provider(
-            npi="1234567890",
-            name="John Doe",
-            npi_type="Individual",
-            primary_practice_address="123 Main St, Anytown, USA",
-            phone="555-555-5555",
-            primary_taxonomy="General Practice"
-        )
+        provider = Provider(**provider_data)
 
         db.session.add(provider)
         db.session.commit()
@@ -45,14 +50,7 @@ class TestProviderModel(TestCase):
 
     def test_update_provider(self):
         # Create a new Provider instance
-        provider = Provider(
-            npi="1234567890",
-            name="John Doe",
-            npi_type="Individual",
-            primary_practice_address="123 Main St, Anytown, USA",
-            phone="555-555-5555",
-            primary_taxonomy="General Practice"
-        )
+        provider = Provider(**provider_data)
 
         db.session.add(provider)
         db.session.commit()
@@ -72,14 +70,7 @@ class TestProviderModel(TestCase):
     
     def test_delete_provider(self):
         # Create a new Provider instance
-        provider = Provider(
-            npi="1234567890",
-            name="John Doe",
-            npi_type="Individual",
-            primary_practice_address="123 Main St, Anytown, USA",
-            phone="555-555-5555",
-            primary_taxonomy="General Practice"
-        )
+        provider = Provider(**provider_data)
 
         db.session.add(provider)
         db.session.commit()
@@ -99,15 +90,7 @@ class TestProviderModel(TestCase):
     
     def test_provider_repr(self):
         # Create a new Provider instance
-        provider = Provider(
-            npi="1234567890",
-            name="John Doe",
-            npi_type="Individual",
-            primary_practice_address="123 Main St, Anytown, USA",
-            phone="555-555-5555",
-            primary_taxonomy="General Practice"
-        )
-
+        provider = Provider(**provider_data)
         # Assertions to ensure the __repr__ method returns the expected string
         assert str(provider) == "<Provider John Doe NPI: 1234567890>"
 
@@ -126,14 +109,7 @@ class TestProviderModel(TestCase):
     
     def test_archive_provider(self):
         # Create a new Provider instance
-        provider = Provider(
-            npi="1234567890",
-            name="Test Provider",
-            npi_type="Individual",
-            primary_practice_address="123 Main St, Anytown, USA",
-            phone="555-555-5555",
-            primary_taxonomy="General Practice"
-        )
+        provider = Provider(**provider_data)
         db.session.add(provider)
         db.session.commit()
 

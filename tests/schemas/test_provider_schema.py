@@ -22,6 +22,9 @@ class TestProviderSchema(TestCase):
             name="John Doe",
             npi_type="Individual",
             primary_practice_address="123 Main St, Anytown, USA",
+            city="Anytown",
+            state="NY",
+            postal_code="12345",
             phone="555-555-5555",
             primary_taxonomy="General Practice"
         )
