@@ -134,6 +134,7 @@ qtconsole @ file:///tmp/build/80754af9/qtconsole_1632739723211/work
 QtPy @ file:///tmp/build/80754af9/qtpy_1629397026935/work
 regex==2022.10.31
 requests==2.28.1
+requests-mock==1.11.0
 rsa @ file:///tmp/build/80754af9/rsa_1614366226499/work
 ruamel-yaml-conda @ file:///tmp/build/80754af9/ruamel_yaml_1616016711199/work
 s3transfer==0.6.0
