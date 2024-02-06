@@ -34,10 +34,11 @@ def update_provider_from_npi_single(provider_id):
                 current_app.logger.error(f"Provider with ID {provider_id} not found.")
                 return "Provider not found", False
 
-            provider_data = fetch_provider_from_registry(provider.npi)
-            if not provider_data:
+            registry_response = fetch_provider_from_registry(provider.npi)
+            if not registry_response:
                 current_app.logger.error(f"Failed to fetch data for provider with NPI: {provider.npi}.")
                 return "Failed to fetch provider data from NPI registry", False
+            provider_data = serialize_registry_provider(registry_response)
 
             serialized_data = provider_schema.dump(provider)
             updated_data = provider_schema.load(provider_data, instance=provider, partial=True)

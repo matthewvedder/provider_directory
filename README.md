@@ -1,8 +1,11 @@
 pip freeze > requirements.txt
+pip install -r requirements.txt
 
 flask run
 
 pytest
+
+source venv/bin/activate
 
 from app.app import db
 from app.models.provider import Provider

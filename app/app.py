@@ -2,10 +2,12 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from flask_migrate import Migrate
 from .utils.celery_utils import make_celery
 
 db = SQLAlchemy()
 ma = Marshmallow()
+migrate = Migrate()
 
 def create_app(config_filename=None):
     app = Flask(__name__)
@@ -34,6 +36,7 @@ def create_app(config_filename=None):
 
     db.init_app(app)
     ma.init_app(app)
+    migrate.init_app(app, db)
 
     from .controllers.provider_controller import provider_blueprint
     app.register_blueprint(provider_blueprint)
