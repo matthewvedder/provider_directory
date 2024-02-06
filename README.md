@@ -114,3 +114,7 @@ initiate_provider_updates()
 ```
 
 ---
+
+### TODO
+- configure logging
+- schedule workers with celery beat
