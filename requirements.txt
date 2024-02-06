@@ -1,10 +1,12 @@
 aiohttp==3.8.3
 aiosignal==1.3.1
+amqp==5.2.0
 argon2-cffi @ file:///tmp/build/80754af9/argon2-cffi_1613037499734/work
 async-generator @ file:///home/ktietz/src/ci/async_generator_1611927993394/work
 async-timeout==4.0.2
 attrs==22.2.0
 backcall @ file:///home/ktietz/src/ci/backcall_1611930011877/work
+billiard==4.2.0
 bleach @ file:///tmp/build/80754af9/bleach_1628110601003/work
 blis @ file:///tmp/build/80754af9/cython-blis_1613318563309/work
 boto3==1.26.47
@@ -13,11 +15,15 @@ Bottleneck @ file:///tmp/build/80754af9/bottleneck_1607575130224/work
 brotlipy==0.7.0
 cachetools @ file:///tmp/build/80754af9/cachetools_1619597386817/work
 catalogue @ file:///home/conda/feedstock_root/build_artifacts/catalogue_1632148432306/work
+celery==5.3.6
 certifi==2022.12.7
 cffi @ file:///tmp/build/80754af9/cffi_1625814692085/work
 chardet @ file:///tmp/build/80754af9/chardet_1607706775000/work
 charset-normalizer==2.1.1
 click==8.1.3
+click-didyoumean==0.3.0
+click-plugins==1.1.1
+click-repl==0.3.0
 colorama @ file:///tmp/build/80754af9/colorama_1607707115595/work
 conda==4.10.3
 conda-package-handling @ file:///tmp/build/80754af9/conda-package-handling_1618262147379/work
@@ -43,6 +49,7 @@ Flask==2.2.3
 flask-marshmallow==1.1.0
 Flask-SQLAlchemy==3.0.3
 Flask-Testing==0.8.1
+flower==2.0.1
 fonttools==4.25.0
 frozenlist==1.3.3
 ghapi==0.1.19
@@ -56,6 +63,7 @@ googleapis-common-protos @ file:///tmp/build/80754af9/googleapis-common-protos-f
 greenlet==2.0.2
 grpcio @ file:///tmp/build/80754af9/grpcio_1614884176703/work
 huggingface-hub==0.11.1
+humanize==4.9.0
 idna==3.4
 importlib-metadata @ file:///tmp/build/80754af9/importlib-metadata_1631916692253/work
 iniconfig==2.0.0
@@ -77,6 +85,7 @@ jupyter-core @ file:///tmp/build/80754af9/jupyter_core_1612213314396/work
 jupyterlab-pygments @ file:///tmp/build/80754af9/jupyterlab_pygments_1601490720602/work
 jupyterlab-widgets @ file:///tmp/build/80754af9/jupyterlab_widgets_1609884341231/work
 kiwisolver @ file:///tmp/build/80754af9/kiwisolver_1612281846643/work
+kombu==5.3.5
 MarkupSafe==2.1.2
 marshmallow==3.20.2
 marshmallow-sqlalchemy==1.0.0
@@ -111,7 +120,7 @@ Pillow @ file:///tmp/build/80754af9/pillow_1625655408865/work
 pluggy==1.4.0
 preshed @ file:///tmp/build/80754af9/preshed_1621860846438/work
 prometheus-client @ file:///tmp/build/80754af9/prometheus_client_1623189609245/work
-prompt-toolkit @ file:///Users/ktietz/demo/mc3/conda-bld/prompt-toolkit_1629146841569/work
+prompt-toolkit==3.0.43
 protobuf==3.16.0
 ptyprocess @ file:///tmp/build/80754af9/ptyprocess_1609355006118/work/dist/ptyprocess-0.7.0-py2.py3-none-any.whl
 pyasn1 @ file:///Users/ktietz/demo/mc3/conda-bld/pyasn1_1629708007385/work
@@ -132,6 +141,7 @@ PyYAML==6.0
 pyzmq @ file:///tmp/build/80754af9/pyzmq_1628275385016/work
 qtconsole @ file:///tmp/build/80754af9/qtconsole_1632739723211/work
 QtPy @ file:///tmp/build/80754af9/qtpy_1629397026935/work
+redis==5.0.1
 regex==2022.10.31
 requests==2.28.1
 requests-mock==1.11.0
@@ -165,7 +175,9 @@ traitlets @ file:///tmp/build/80754af9/traitlets_1632522747050/work
 transformers==4.25.1
 typer @ file:///home/conda/feedstock_root/build_artifacts/typer_1609874382867/work
 typing-extensions==4.4.0
+tzdata==2023.4
 urllib3==1.26.13
+vine==5.1.0
 wasabi @ file:///tmp/build/80754af9/wasabi_1612219178408/work
 wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
 webencodings==0.5.1
