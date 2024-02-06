@@ -25,8 +25,8 @@ def serialize_registry_provider(provider_registry_response):
 
         # Fields inside 'basic'
         basic_info = provider.get('basic', {})
-        if 'organization_name' in basic_info:
-            provider_data["name"] = basic_info['organization_name']
+        if 'authorized_official_first_name' in basic_info and 'authorized_official_last_name' in basic_info:
+            provider_data["name"] = f"{basic_info['authorized_official_first_name']} {basic_info['authorized_official_last_name']}" 
 
         # Handling addresses
         addresses = provider.get('addresses', [])
@@ -34,6 +34,12 @@ def serialize_registry_provider(provider_registry_response):
             primary_address = addresses[0]  # Assuming the first address is the primary one
             if 'address_1' in primary_address:
                 provider_data["primary_practice_address"] = primary_address['address_1']
+            if 'city' in primary_address:
+                provider_data["city"] = primary_address['city']
+            if 'state' in primary_address:
+                provider_data["state"] = primary_address['state']
+            if 'postal_code' in primary_address:
+                provider_data["postal_code"] = primary_address['postal_code']
             if 'telephone_number' in primary_address:
                 provider_data["phone"] = primary_address['telephone_number']
 

@@ -9,7 +9,10 @@ api_response = {
     "result_count": 1,
     "results": [{
         "number": "1205186715",
-        "basic": {"organization_name": "24 ON PHYSICIANS, P.C."},
+        "basic": {
+            "authorized_official_first_name": "DAN",
+            "authorized_official_last_name": "FULLER",
+        },
         "enumeration_type": "NPI-2",
         "addresses": [{
             "address_1": "1500 S LAKE PARK AVE",
@@ -42,21 +45,19 @@ class TestNPIService(TestCase):
 
     def test_serialize_registry_provider(self):
         # Prepare a mocked API response
-        api_response = {
-            "result_count": 1,
-            "results": [{
-                "number": "1205186715",
-                "basic": {"organization_name": "24 ON PHYSICIANS, P.C."},
-                # Add other fields as necessary
-            }]
-        }
-
         # Call your serialization function
         serialized_data = serialize_registry_provider(api_response)
+        print(serialized_data)
         expected_data = {
             "npi": "1205186715",
-            "name": "24 ON PHYSICIANS, P.C.",
-            # Add other expected fields
+            "name": "DAN FULLER",
+            "npi_type": "NPI-2",
+            "primary_practice_address": "1500 S LAKE PARK AVE",
+            "city": "HOBART",
+            "state": "IN",
+            "postal_code": "463426638",
+            "phone": "770-740-0895",
+            "primary_taxonomy": "Hospitalist"
         }
 
         self.assertEqual(serialized_data, expected_data)
