@@ -2,6 +2,8 @@ import pytest
 from flask_testing import TestCase
 from app.app import create_app, db
 from app.models.provider import Provider
+from app.models.provider_archive import ProviderArchive
+from datetime import datetime
 
 class TestProviderModel(TestCase):
     def create_app(self):
@@ -121,3 +123,32 @@ class TestProviderModel(TestCase):
         # Retrieve the provider from the database
         retrieved_provider = Provider.query.first()
         assert retrieved_provider.npi == "1234567890"
+    
+    def test_archive_provider(self):
+        # Create a new Provider instance
+        provider = Provider(
+            npi="1234567890",
+            name="Test Provider",
+            npi_type="Individual",
+            primary_practice_address="123 Main St, Anytown, USA",
+            phone="555-555-5555",
+            primary_taxonomy="General Practice"
+        )
+        db.session.add(provider)
+        db.session.commit()
+
+        # Archive the provider
+        provider.archive()
+
+        # Fetch the archived provider
+        archived_provider = ProviderArchive.query.filter_by(original_provider_id=provider.id).first()
+
+        # Assertions
+        assert archived_provider is not None
+        assert archived_provider.npi == provider.npi
+        assert archived_provider.name == provider.name
+        assert archived_provider.npi_type == provider.npi_type
+        # Add more assertions as necessary to cover all fields
+        
+        # Optionally, check the timestamp is reasonable (e.g., not in the future)
+        assert archived_provider.archived_at <= datetime.utcnow()

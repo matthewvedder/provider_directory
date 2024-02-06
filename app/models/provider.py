@@ -1,5 +1,6 @@
 from app.app import db
 from datetime import datetime
+from .provider_archive import ProviderArchive
 
 class Provider(db.Model):
     __tablename__ = 'providers'
@@ -24,3 +25,16 @@ class Provider(db.Model):
 
     def __repr__(self):
         return f'<Provider {self.name if self.name else "Unnamed"} NPI: {self.npi}>'
+    
+    def archive(self):
+        archived_provider = ProviderArchive(
+            original_provider_id=self.id,
+            npi=self.npi,
+            name=self.name,
+            npi_type=self.npi_type,
+            primary_practice_address=self.primary_practice_address,
+            phone=self.phone,
+            primary_taxonomy=self.primary_taxonomy,
+        )
+        db.session.add(archived_provider)
+        db.session.commit()
