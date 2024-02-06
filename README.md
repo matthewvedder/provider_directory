@@ -9,8 +9,9 @@ from app.models.provider import Provider
 db.create_all()
 
 celery -A make_celery worker --loglevel INFO
-celery -A make_celery worker --loglevel INFO flower
+celery -A make_celery flower
 
 
 from app.tasks.check_providers import initiate_provider_updates
 initiate_provider_updates()
+
