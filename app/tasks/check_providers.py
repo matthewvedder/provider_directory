@@ -27,34 +27,46 @@ celery = app.celery
 @celery.task
 def update_provider_from_npi_single(provider_id):
     with app.app_context():
-        provider_schema = ProviderSchema()
         try:
             provider = Provider.query.get(provider_id)
             if not provider:
                 current_app.logger.error(f"Provider with ID {provider_id} not found.")
                 return "Provider not found", False
 
-            registry_response = fetch_provider_from_registry(provider.npi)
-            if not registry_response:
-                current_app.logger.error(f"Failed to fetch data for provider with NPI: {provider.npi}.")
+            provider_data = fetch_provider_from_registry(provider.npi)
+            if not provider_data:
+                current_app.logger.error(f"Failed to fetch data for provider {provider.npi}.")
                 return "Failed to fetch provider data from NPI registry", False
-            provider_data = serialize_registry_provider(registry_response)
 
-            serialized_data = provider_schema.dump(provider)
-            updated_data = provider_schema.load(provider_data, instance=provider, partial=True)
+            serialized_data = serialize_registry_provider(provider_data)
 
-            # Check if there are any changes
-            if serialized_data == updated_data:
-                current_app.logger.info(f"No updates required for provider {provider_id}.")
+            # Initialize a flag to track changes
+            changes_made = False
+
+            # Check for changes before updating
+            for key, new_value in serialized_data.items():
+                if hasattr(provider, key):
+                    current_value = getattr(provider, key, None)
+                    if current_value != new_value:
+                        changes_made = True
+                        break  # Break early as we only need to know if there are any changes
+
+            if changes_made:
+                # Archive the current provider state before making updates
+                provider.archive()
+
+                # Apply updates to the provider
+                for key, new_value in serialized_data.items():
+                    if hasattr(provider, key) and getattr(provider, key, None) != new_value:
+                        setattr(provider, key, new_value)
+                        current_app.logger.info(f"Updated {key} for provider {provider.id}.")
+
+                db.session.commit()
+                current_app.logger.info(f"Provider {provider.id} updated successfully.")
+                return f"Provider {provider.id} updated successfully", True
+            else:
+                current_app.logger.info(f"No updates required for provider {provider.id}.")
                 return "No update needed", True
-
-            # Archive the provider if changes are detected
-            provider.archive()
-
-            # Apply the loaded data to the provider instance
-            db.session.commit()
-            current_app.logger.info(f"Provider {provider_id} updated successfully.")
-            return f"Provider {provider_id} updated successfully", True
 
         except Exception as e:
             db.session.rollback()
